@@ -1,7 +1,5 @@
 name: Testing CI
-
 on: pull_request
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,16 +10,18 @@ jobs:
           - 18
           - 20
           - 21
+          - 22
+          - 23
+          - 24
     services:
       postgres:
         image: postgres
         env:
           POSTGRES_PASSWORD: postgres
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
